@@ -30,13 +30,21 @@ The agent loads it when the `description` matches the task.
 
 ## Tests
 
-Needs Python 3.10+ and `ffmpeg` (for loom-ingest). No network or API keys required.
+Needs Python 3.10+, `ffmpeg` (for loom-ingest), and PyYAML for the
+repository-structure test. Install the test dependency in a virtual environment
+outside the repository (the hygiene tests scan every file under the repository),
+then run:
 
 ```bash
-python3 -m unittest discover -s tests            # repo structure and safety checks
-python3 -m unittest discover -s skills/ios-shortcuts/tests
-python3 -m unittest discover -s skills/loom-ingest/tests
+python3 -m venv ../agent-skills-venv
+. ../agent-skills-venv/bin/activate
+python -m pip install PyYAML
+python -m unittest discover -s tests
+python -m unittest discover -s skills/ios-shortcuts/tests
+python -m unittest discover -s skills/loom-ingest/tests
 ```
+
+The tests need no network access or API keys after the test dependency is installed.
 
 ## Notes
 
